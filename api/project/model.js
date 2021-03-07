@@ -8,7 +8,7 @@ const getProjects = async()=>{
                     console.log('this project', thing.project_completed)
                 return {   
                     ...thing,
-                    project_completed: (thing.project_completed == 0 ? false : true)
+                    project_completed: (thing.project_completed == 1 ? true : false)
                 }
             })
         
@@ -21,7 +21,7 @@ const getProjectsByID = async(project_id)=>{
             // project_id: data.project_id,
             // project_name:data.project_name,
             // project_description: data.project_description,
-            project_completed: (data.project_completed == 0 ? false : true)
+            project_completed: (data.project_completed == 1 ? true : false)
         }
     }
     return data;

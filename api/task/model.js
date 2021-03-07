@@ -21,7 +21,7 @@ const getTasks = async()=>{
                     console.log('this task', thing.task_completed)
                 return {   
                     ...thing,
-                    task_completed: (thing.task_completed == 0 ? false : true)
+                    task_completed: (thing.task_completed == 1 ? true : false)
                 }
             })
         
@@ -42,7 +42,7 @@ const getTaskByID = async(task_id)=>{
     console.log(data)
     if(data){
         return{...data,
-            task_completed: (data.task_completed == 0 ? false : true)
+            task_completed: (data.task_completed == 1 ? true : false)
         }
     }
     return data;

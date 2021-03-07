@@ -1,6 +1,7 @@
 // build your `/api/tasks` router here
 // build your `/api/resources` router here
-const express = require('express')
+const express = require('express');
+const { checkDescription, checkProjectID } = require('./middleware');
 const model = require('./model')
 const router = express.Router();
 
@@ -20,7 +21,7 @@ router.get('/:id', async(req,res,next)=>{
         next(err);
     }
 })
-router.post('/' , async ( req , res , next ) => {
+router.post('/' , checkDescription(), checkProjectID(), async ( req , res , next ) => {
     try{
         const data = await model.insertTask(req.body)
         res.status(200).json(data)
