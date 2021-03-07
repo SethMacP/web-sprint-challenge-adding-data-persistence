@@ -18,7 +18,7 @@ exports.up = async function(knex) {
     table.integer('task_completed').notNull().defaultTo(0)
     table.integer('project_id').notNull().references('project_id').inTable('Projects')
   })
-  await knex.schema.createTable("Projects_Resources", (table)=>{
+  await knex.schema.createTable("Project_Resources", (table)=>{
     table.integer('project_id').notNull().references('project_id').inTable('Projects')
     table.integer('resource_id').notNull().references('resource_id').inTable('Resources')
 
