@@ -18,7 +18,27 @@ const getTasks = async()=>{
         return tasks
 }
 const getTaskByID = async(task_id)=>{
-    return await db('Tasks').where("task_id", task_id)
+    const data = await db('Tasks as t')
+        .where("task_id", task_id)
+        .first()
+        .innerJoin('projects as p', "t.project_id", "p.project_id")
+        .select(
+            "t.task_id",
+            "t.task_description",
+            "t.task_notes",
+            "t.task_completed",
+            "p.project_name"
+        )
+    console.log(data)
+    if(data){
+        return{...data,
+            // project_id: data.project_id,
+            // project_name:data.project_name,
+            // project_description: data.project_description,
+            task_completed: (data.task_completed == 0 ? false : true)
+        }
+    }
+    return data;
 }
 const insertTask = async(newItem)=>{
     const post = await db.insert({

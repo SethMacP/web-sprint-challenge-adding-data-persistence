@@ -13,6 +13,14 @@ router.get('/' , async ( req , res , next ) => {
     }
 
 })
+router.get('/:id', async(req,res,next)=>{
+    try{
+        const results = await model.getProjectsByID(req.params.id)
+        res.status(200).json(results)
+    }catch(err){
+        next(err);
+    }
+})
 router.post('/' , async ( req , res , next ) => {
     try{
         const data = await model.insertProject(req.body)

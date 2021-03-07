@@ -4,7 +4,16 @@ const getProjects = async()=>{
     return await db('Projects');
 }
 const getProjectsByID = async(project_id)=>{
-    return await db('Projects').where("project_id", project_id)
+    const data =  await db('Projects').where("project_id", project_id).first()
+    if(data){
+        return{...data,
+            // project_id: data.project_id,
+            // project_name:data.project_name,
+            // project_description: data.project_description,
+            project_completed: (data.project_completed == 0 ? false : true)
+        }
+    }
+    return data;
 }
 const insertProject = async(newItem)=>{
     const insertItem = await db.insert({
@@ -12,11 +21,7 @@ const insertProject = async(newItem)=>{
         project_description: newItem.project_description,
         project_completed: (newItem.project_completed === true ? 1 : 0)
     }).into("Projects")
-    console.log('insertItem', insertItem);
-    
-    return getProjectsByID(insertItem);
-    
-    
+   return getProjectsByID(insertItem);  
 }
 
 module.exports={
