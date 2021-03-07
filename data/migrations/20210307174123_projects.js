@@ -27,7 +27,7 @@ exports.up = async function(knex) {
 
 exports.down = async function(knex) {
   //Opposite Order : Roof before floor.
-  await knex.schema.dropTableIfExists("Projects_Resources");
+  await knex.schema.dropTableIfExists("Project_Resources");
   await knex.schema.dropTableIfExists("Tasks");
   await knex.schema.dropTableIfExists("Resources");
   await knex.schema.dropTableIfExists("Projects");
