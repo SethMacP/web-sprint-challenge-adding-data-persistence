@@ -1,7 +1,18 @@
 const db = require('../../data/dbConfig');
 
 const getProjects = async()=>{
-    return await db('Projects');
+    const projects =  await db('Projects');
+    console.log(projects)
+        //return a map function that returns each object with the boolean converted
+            return projects.map( thing => {
+                    console.log('this project', thing.project_completed)
+                return {   
+                    ...thing,
+                    project_completed: (thing.project_completed == 0 ? false : true)
+                }
+            })
+        
+        // return projects
 }
 const getProjectsByID = async(project_id)=>{
     const data =  await db('Projects').where("project_id", project_id).first()

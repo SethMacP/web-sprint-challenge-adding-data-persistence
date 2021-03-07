@@ -1,5 +1,5 @@
 // build your `Task` model here
-//MVP MET
+
 
 // build your `Resource` model here
 const db = require('../../data/dbConfig');
@@ -15,7 +15,17 @@ const getTasks = async()=>{
             'p.project_name',
             'p.project_description'
         )
-        return tasks
+        console.log(tasks)
+        //return a map function that returns each object with the boolean converted
+            return tasks.map( thing => {
+                    console.log('this task', thing.task_completed)
+                return {   
+                    ...thing,
+                    task_completed: (thing.task_completed == 0 ? false : true)
+                }
+            })
+        
+        // return tasks
 }
 const getTaskByID = async(task_id)=>{
     const data = await db('Tasks as t')
@@ -32,9 +42,6 @@ const getTaskByID = async(task_id)=>{
     console.log(data)
     if(data){
         return{...data,
-            // project_id: data.project_id,
-            // project_name:data.project_name,
-            // project_description: data.project_description,
             task_completed: (data.task_completed == 0 ? false : true)
         }
     }
