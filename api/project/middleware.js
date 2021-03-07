@@ -9,13 +9,6 @@ const checkProjectRequirements = () => (req,res,next)=>{
         next();
     }
 
-// const checkProjectRequirements = () => async(req, res ,next)=>{
-//     try{
-        
-//     }catch(err){
-//         next(err)
-//     }
-// }
 
 module.exports = {
     checkProjectRequirements,
